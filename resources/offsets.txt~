@@ -1,0 +1,5 @@
+volslider:		0,0		(32x80)
+bpmslider:		32, 0
+pitchslider:	64, 0
+box:			0, 96  (20x20)
+trackinfo:		0, 128   (96x24)

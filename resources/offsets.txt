@@ -1,0 +1,13 @@
+volslider:		0,0		(32x80)
+bpmslider:		32, 0
+pitchslider:	64, 0
+box:			0, 96  (20x20)
+trackinfo:		0, 128   (96x24)
+buttonOff:		128, 128  (24x24)
+buttonOn:		152, 128  (24x24)
+
+GUI colours:
+Background colour: 128, 188
+Border colour:     128, 196
+Separator colour:  128, 204
+Highlight colour:  128, 212

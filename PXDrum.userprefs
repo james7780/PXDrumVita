@@ -1,0 +1,19 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AppMain.cs">
+    <Files>
+      <File FileName="AppMain.cs" Line="62" Column="4" />
+      <File FileName="Sprite.cs" Line="24" Column="24" />
+      <File FileName="PatternGrid.cs" Line="1" Column="1" />
+      <File FileName="Pattern.cs" Line="23" Column="5" />
+      <File FileName="Song.cs" Line="17" Column="1" />
+      <File FileName="Drumkit.cs" Line="17" Column="1" />
+      <File FileName="SpriteTile.cs" Line="50" Column="4" />
+      <File FileName="Text.cs" Line="17" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
