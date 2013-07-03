@@ -22,12 +22,18 @@ namespace PXDrum
 		static Sprite bgSprite;
 		static Texture2D texture;
 		static GamePadData gamePadData;
+		static Song m_song = new Song();
 		static Pattern currentPattern = new Pattern();
 		private static PatternGrid patternGrid;
 		static Text textWriter;
 		static Timer clock;
 		/// Tick count when we next have to advance the beat
 		double nextProcessTick;
+		
+		// Thread control variables
+		static bool isThreadAlive = true;
+		static object syncObject = new object();
+		static Thread playbackThread = null;
 		
 		public static void Main (string[] args)
 		{
@@ -59,6 +65,14 @@ namespace PXDrum
 			
 			textWriter = new Text(graphics, 16.0f);
 			
+			m_song.Load("/Documents/songs/flowers1.xds");
+			
+			// Start playback thread
+			//simStart = false;
+			playbackThread = new Thread(new ThreadStart(playbackThreadMain));
+			playbackThread.Start();
+			
+		
 		}
 
 		public static void Update ()
@@ -78,9 +92,48 @@ namespace PXDrum
 			patternGrid.Render();
 			
 			textWriter.Write(new Vector2(10.0f, 10.0f), "Hi James whats up???");
+			//textWriter.Write(new Vector2(0.0f, 0.0f), "Hi James what's up???");
 			
 			// Present the screen
 			graphics.SwapBuffers ();
 		}
+		
+		
+		/// <summary>
+		/// The playback thread
+		/// </summary>
+		static void playbackThreadMain()
+		{
+			Console.WriteLine("Playback thread start");
+			
+			// Are there any events which stop the program ???
+			while(isThreadAlive)
+			{
+				// Process playback
+				if(true) //simStart == true)
+				{
+					// Before changing myScene, 
+					// it is necessary to avoid confliction with other thread					
+					lock(syncObject)
+					{
+						//myScene.Simulate(clickIndex, clickPos, diffPos);
+						// To avoid doing several times simulation within one frame,
+						// set this flag as false
+						//simStart = false;
+					}
+					
+					Console.WriteLine("pb thread running");
+					Thread.Sleep(1000);
+				}
+				else
+				{
+					// Nothing to do now, therefore it sleeps for a while
+					Thread.Sleep(1);
+				}
+			}
+			
+			Console.WriteLine("Playback thread end");
+		}
+		
 	}
 }

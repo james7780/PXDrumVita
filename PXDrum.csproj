@@ -43,6 +43,7 @@
     <Compile Include="Pattern.cs" />
     <Compile Include="Drumkit.cs" />
     <Compile Include="Text.cs" />
+    <Compile Include="TrackMixInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -59,4 +60,17 @@
     <Content Include="resources\bg.png" />
     <Content Include="resources\font_8x16.png" />
   </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy inheritsSet="Mono" inheritsScope="text/plain" scope="text/plain" />
+          <CSharpFormattingPolicy inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+          <VersionControlPolicy inheritsSet="Mono" />
+          <ChangeLogPolicy inheritsSet="Mono" />
+          <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xml" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

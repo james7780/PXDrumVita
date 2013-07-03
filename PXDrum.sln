@@ -16,5 +16,46 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = PXDrum.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $2
+		$2.TabWidth = 4
+		$2.RemoveTrailingWhitespace = True
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/plain
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/x-csharp
+		$3.scope = text/x-csharp
+		$0.TextStylePolicy = $4
+		$4.FileWidth = 120
+		$4.TabWidth = 4
+		$4.inheritsSet = Mono
+		$4.inheritsScope = text/plain
+		$4.scope = text/plain
+		$0.TextStylePolicy = $5
+		$5.inheritsSet = null
+		$5.scope = text/x-cgsrc
+		$0.TextStylePolicy = $6
+		$6.inheritsSet = null
+		$6.scope = application/xml
+		$0.XmlFormattingPolicy = $7
+		$7.inheritsSet = Mono
+		$7.inheritsScope = application/xml
+		$7.scope = application/xml
+		$0.StandardHeader = $8
+		$8.Text = 
+		$8.IncludeInNewFiles = True
+		$0.VersionControlPolicy = $9
+		$9.inheritsSet = Mono
+		$0.ChangeLogPolicy = $10
+		$10.UpdateMode = None
+		$10.MessageStyle = $11
+		$11.LineAlign = 0
+		$10.inheritsSet = Mono
+		description = PXDrum Vita drum machine application
 	EndGlobalSection
 EndGlobal

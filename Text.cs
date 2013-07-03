@@ -36,6 +36,8 @@ namespace PXDrum
 		
 		protected Texture2D fontTexture;
 		
+		string m_text;
+		
 		
 		// Property cannot describe Position.X, public variable is used.
 		public Vector2 origin ;
@@ -71,12 +73,10 @@ namespace PXDrum
 			}
 			
 			this.graphics = graphics;
-			this.width = charHeight;
-			this.height = charHeight;
-			//this.origin = position;
+			this.width = fontTexture.Width; //charHeight;
+			this.height = fontTexture.Height; //charHeight;
 
 			//@e                                                Vertex coordinate,               Texture coordinate,     Vertex color
-			//vertexBuffer = new VertexBuffer(4, indexSize, VertexFormat.Float3, VertexFormat.Float2, VertexFormat.Float4);
 			vertexBuffer = new VertexBuffer(NUMVERTICES, VertexFormat.Float3, VertexFormat.Float2, VertexFormat.Float4);
 			
 		}
@@ -108,10 +108,11 @@ namespace PXDrum
 		// Write text to the screen
 		public void Write(Vector2 position, string text)
 		{
-			// TODO
 			this.origin = position;
+			m_text = text;
 			
-			const float tileSize = 1.0f / 32.0f;
+			const float tileSizeX = 1.0f / 32.0f;	// 32 chars per row in the texture
+			const float tileSizeY = 2.0f / 32.0f;	// Double-height characters
 			int vertIndex = 0;
 			int texIndex = 0;
 			float x = 0.0f;
@@ -123,35 +124,35 @@ namespace PXDrum
 				vertices[vertIndex + 2] = 0.0f;	// z0
 		
 				vertices[vertIndex + 3] = x;	// x1
-				vertices[vertIndex + 4] = y + tileSize;	// y1
+				vertices[vertIndex + 4] = y + tileSizeY;	// y1
 				vertices[vertIndex + 5] = 0.0f;	// z1
 		
-				vertices[vertIndex + 6] = x + tileSize;	// x2
+				vertices[vertIndex + 6] = x + tileSizeX;	// x2
 				vertices[vertIndex + 7] = y;	// y2
 				vertices[vertIndex + 8] = 0.0f;	// z2
 		
-				vertices[vertIndex + 9] = x + tileSize;	// x3
-				vertices[vertIndex + 10] = y + tileSize;	// y3
+				vertices[vertIndex + 9] = x + tileSizeX;	// x3
+				vertices[vertIndex + 10] = y + tileSizeY;	// y3
 				vertices[vertIndex + 11] = 0.0f;	// z3
 
 				vertIndex += 12;
-				x += tileSize;
+				x += tileSizeX;
 				
 				char c = text[i];
-				float tx = tileSize * (c % 32);		// 32 chars per row in the texture
-				float ty = tileSize * (c / 32);
+				float tx = tileSizeX * (c % 32);		// 32 chars per row in the texture
+				float ty = tileSizeY * (c / 32);
 				
 				texcoords[texIndex] = tx;
 				texcoords[texIndex + 1] = ty;
 
 				texcoords[texIndex + 2] = tx;
-				texcoords[texIndex + 3] = ty + tileSize;
+				texcoords[texIndex + 3] = ty + tileSizeY;
 
-				texcoords[texIndex + 4] = tx + tileSize;
+				texcoords[texIndex + 4] = tx + tileSizeX;
 				texcoords[texIndex + 5] = ty;
 
-				texcoords[texIndex + 6] = tx + tileSize;
-				texcoords[texIndex + 7] = ty + tileSize;
+				texcoords[texIndex + 6] = tx + tileSizeX;
+				texcoords[texIndex + 7] = ty + tileSizeY;
 
 				texIndex += 8;
 			}
@@ -173,7 +174,6 @@ namespace PXDrum
 			vertexBuffer.SetVertices(1, texcoords);
 			vertexBuffer.SetVertices(2, colours);
 			
-			//vertexBuffer.SetIndices(indices);
 			graphics.SetVertexBuffer(0, vertexBuffer);
 			graphics.SetTexture(0, fontTexture);
 			
@@ -182,15 +182,14 @@ namespace PXDrum
 			
 			Matrix4 unitScreenMatrix = new Matrix4(
 				 Width*2.0f/screenWidth,	0.0f,		0.0f, 0.0f,
-				 0.0f,	 Width*(-2.0f)/screenHeight,	0.0f, 0.0f,
+				 0.0f,	 Height*(-2.0f)/screenHeight,	0.0f, 0.0f,
 				 0.0f,	 0.0f, 1.0f, 0.0f,
 				 -1.0f+(origin.X-Width * Center.X)*2.0f/screenWidth,  1.0f+(origin.Y-Height*Center.Y)*(-2.0f)/screenHeight, 0.0f, 1.0f
 			);
 			
 			shaderProgram.SetUniformValue(0, ref unitScreenMatrix);
-
-			//graphics.DrawArrays(DrawMode.TriangleStrip, 0, indexSize);
-			graphics.DrawArrays(DrawMode.TriangleStrip, 0, 4, MAXCHARS);
+			
+			graphics.DrawArrays(DrawMode.TriangleStrip, 0, 4, m_text.Length);
 
 		}
 				

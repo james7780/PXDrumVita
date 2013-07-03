@@ -19,11 +19,11 @@ namespace PXDrum
 		protected GraphicsContext graphics;
 		
 		// Vertex coordinates
-		const int NUMVERTICES = 4 * Pattern.NUMCOLUMNS * Pattern.NUMROWS;
+		const int NUMVERTICES = 4 * Pattern.STEPS_PER_PATTERN * Pattern.NUM_TRACKS;
 		float[] vertices = new float[NUMVERTICES * 3];
 		
 		// Texture coordinates
-		float[] texcoords = new float[8 * Pattern.NUMCOLUMNS * Pattern.NUMROWS];
+		float[] texcoords = new float[8 * Pattern.STEPS_PER_PATTERN * Pattern.NUM_TRACKS];
 /* WAS
 		float[] texcoords = {
 			0.0f, 0.0f,	// left top
@@ -33,7 +33,7 @@ namespace PXDrum
 		};
 */		
 		// Vertex color
-		float[] colours = new float[16 * Pattern.NUMCOLUMNS * Pattern.NUMROWS];
+		float[] colours = new float[16 * Pattern.STEPS_PER_PATTERN * Pattern.NUM_TRACKS];
 /*
 		float[] colours = {
 			1.0f,	1.0f,	1.0f,	1.0f,	// left top
@@ -126,9 +126,9 @@ namespace PXDrum
 			const float tileSize = 1.0f / 16.0f;
 			int vertIndex = 0;
 			int texIndex = 0;
-			for (int row = 0; row < Pattern.NUMROWS; row++)
+			for (int row = 0; row < Pattern.NUM_TRACKS; row++)
 			{
-				for (int column = 0; column < Pattern.NUMCOLUMNS; column ++)
+				for (int column = 0; column < Pattern.STEPS_PER_PATTERN; column ++)
 				{
 					float x = tileSize * column;
 					float y = tileSize * row;
@@ -169,7 +169,7 @@ namespace PXDrum
 				
 			}
 			
-			for (int i = 0; i < 16 * Pattern.NUMCOLUMNS * Pattern.NUMROWS; i++)
+			for (int i = 0; i < 16 * Pattern.STEPS_PER_PATTERN * Pattern.NUM_TRACKS; i++)
 			{
 				colours[i] = 1.0f;	
 			}
@@ -201,7 +201,7 @@ namespace PXDrum
 			shaderProgram.SetUniformValue(0, ref unitScreenMatrix);
 
 			//graphics.DrawArrays(DrawMode.TriangleStrip, 0, indexSize);
-			graphics.DrawArrays(DrawMode.TriangleStrip, 0, 4, Pattern.NUMROWS * Pattern.NUMCOLUMNS);
+			graphics.DrawArrays(DrawMode.TriangleStrip, 0, 4, Pattern.NUM_TRACKS * Pattern.STEPS_PER_PATTERN);
 
 		}
 				
