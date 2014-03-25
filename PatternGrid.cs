@@ -78,13 +78,15 @@ namespace PXDrum
 			}
 			
 			
-			if (texture == null)
-			{
-				throw new Exception("ERROR: texture is null.");
-			}
+			//if (texture == null)
+			//{
+			//	throw new Exception("ERROR: texture is null.");
+			//}
+
 			
 			this.graphics = graphics;
-			this.texture = texture;
+			//this.texture = texture;
+			this.texture = new Texture2D("/Application/resources/textures512.png", false);
 			this.width = size.X;
 			this.height = size.Y;
 			this.origin = position;
@@ -150,18 +152,27 @@ namespace PXDrum
 					vertices[vertIndex + 11] = 0.0f;	// z3
 
 					vertIndex += 12;
-					
-					texcoords[texIndex] = 0.0f;
-					texcoords[texIndex + 1] = 0.0f;
 
-					texcoords[texIndex + 2] = 0.0f;
-					texcoords[texIndex + 3] = 1.0f;
+					// Set up texture coords (sprite) according to drumevent
+					DrumEvent drumEvent = pattern.drumEvents[row * Pattern.STEPS_PER_PATTERN + column];
+					x = 256.0f / 512;
+					y = 256.0f / 512;
+					float w = 48.0f / 512;
+					float h = 48.0f / 512;
+					if (drumEvent.vol > 20)
+						x = 352.0f / 512;
 
-					texcoords[texIndex + 4] = 1.0f;
-					texcoords[texIndex + 5] = 0.0f;
+					texcoords[texIndex] = x;
+					texcoords[texIndex + 1] = y;
 
-					texcoords[texIndex + 6] = 1.0f;
-					texcoords[texIndex + 7] = 1.0f;
+					texcoords[texIndex + 2] = x;
+					texcoords[texIndex + 3] = y + h;
+
+					texcoords[texIndex + 4] = x + w;
+					texcoords[texIndex + 5] = y;
+
+					texcoords[texIndex + 6] = x + w;
+					texcoords[texIndex + 7] = y + h;
 
 					texIndex += 8;
 	
@@ -204,7 +215,7 @@ namespace PXDrum
 			graphics.DrawArrays(DrawMode.TriangleStrip, 0, 4, Pattern.NUM_TRACKS * Pattern.STEPS_PER_PATTERN);
 
 		}
-				
+
 	}
 }
 

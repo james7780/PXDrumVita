@@ -59,6 +59,7 @@
     <Content Include="resources\textures.png" />
     <Content Include="resources\bg.png" />
     <Content Include="resources\font_8x16.png" />
+    <Content Include="resources\textures512.png" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

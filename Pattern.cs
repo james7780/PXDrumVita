@@ -38,17 +38,21 @@ namespace PXDrum
 		public const int PATTERN_NAME_LENGTH = 32;		
 		//UInt16[] data = new UInt16[NUM_TRACKS * STEPS_PER_PATTERN];
 		public string name;
-	    public DrumEvent[] drumEvents = new DrumEvent[NUM_TRACKS * STEPS_PER_PATTERN];
+	    public DrumEvent[] drumEvents; // = new DrumEvent[NUM_TRACKS * STEPS_PER_PATTERN];
 
 		
 		public Pattern()
 		{
+			drumEvents = new DrumEvent[NUM_TRACKS * STEPS_PER_PATTERN];
+
 			// Initialise data
 			name = "";
 			for (int i = 0; i < NUM_TRACKS * STEPS_PER_PATTERN; i++)
 			{
 				// drumEvents inited in theier constructor already
-				//drumEvents[i].Init();
+				drumEvents[i] = new DrumEvent();
+				if (7 == i)
+					drumEvents[i].vol = 100;
 			}
 			
 		}
